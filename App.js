@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
+  const [focusSubject, setFocusSubject] = useState("Hey");
   return (
     <View style={styles.container}>
-      <Text>GOT IT</Text>
+      <Text>{focusSubject}</Text>
       <StatusBar style="auto" />
     </View>
   );
