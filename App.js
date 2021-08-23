@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import Focus from "./src/features/focus/Focus";
 import { colors } from "./src/utils/colors";
 import RoundedButton from "./src/components/RoundedButton";
-
+import Timer from "./src/features/timer/Timer";
 export default function App() {
   const [focusSubject, setFocusSubject] = useState("Playing");
   console.log(focusSubject);
@@ -16,8 +16,8 @@ export default function App() {
           <Focus addSubject={setFocusSubject} />
         ) : (
           <>
-            <Text>Timer Text</Text>
-            <Text>{focusSubject}</Text>
+            <Timer focusSubject={focusSubject} />
+
             <RoundedButton
               size={40}
               title="clear"
