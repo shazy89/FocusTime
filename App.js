@@ -2,16 +2,31 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import Focus from "./src/features/focus/Focus";
+import { colors } from "./src/utils/colors";
+import RoundedButton from "./src/components/RoundedButton";
 
 export default function App() {
-  const [focusSubject, setFocusSubject] = useState("");
+  const [focusSubject, setFocusSubject] = useState("Playing");
+  console.log(focusSubject);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="red" />
-
-        <Focus addSubject={setFocusSubject} />
-        <Text>{focusSubject}</Text>
+        {!focusSubject ? (
+          <Focus addSubject={setFocusSubject} />
+        ) : (
+          <>
+            <Text>Timer Text</Text>
+            <Text>{focusSubject}</Text>
+            <RoundedButton
+              size={40}
+              title="clear"
+              onPress={() => {
+                setFocusSubject("");
+              }}
+            />
+          </>
+        )}
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -20,7 +35,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#9400d3",
+    backgroundColor: colors.darkPurple,
     alignItems: "center",
     justifyContent: "flex-start"
   }
