@@ -9,7 +9,7 @@ import RoundedButton from "../../components/RoundedButton";
 import Timeing from "./Timeing";
 
 const DEFAULT_TIME = 0.1;
-const Timer = ({ focusSubject, onTimerEnd }) => {
+const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   // USE KEEP AWAKE WILL MAKE SURE THat the scren won't go off
   useKeepAwake();
   const [minutes, setMinutes] = useState(DEFAULT_TIME);
@@ -75,7 +75,7 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
         )}
       </View>
       <View>
-        <RoundedButton size={40} title="clear" />
+        <RoundedButton size={40} title="clear" onPress={clearSubject} />
       </View>
     </View>
   );
