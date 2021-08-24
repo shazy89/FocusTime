@@ -9,7 +9,7 @@ import RoundedButton from "../../components/RoundedButton";
 import Timeing from "./Timeing";
 
 const DEFAULT_TIME = 0.1;
-const Timer = ({ focusSubject }) => {
+const Timer = ({ focusSubject, onTimerEnd }) => {
   // USE KEEP AWAKE WILL MAKE SURE THat the scren won't go off
   useKeepAwake();
   const [minutes, setMinutes] = useState(DEFAULT_TIME);
@@ -20,7 +20,7 @@ const Timer = ({ focusSubject }) => {
       const interval = setInterval(() => Vibration.vibrate(), 1000);
       setTimeout(() => clearInterval(interval), 1000);
     } else {
-      Vibration.vibrate("10s");
+      Vibration.vibrate(10000);
     }
   };
   const onProgress = (progress) => setProgress(progress);
@@ -34,6 +34,7 @@ const Timer = ({ focusSubject }) => {
     setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
+    onTimerEnd();
   };
 
   return (

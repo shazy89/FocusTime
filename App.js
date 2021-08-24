@@ -8,7 +8,9 @@ import RoundedButton from "./src/components/RoundedButton";
 import Timer from "./src/features/timer/Timer";
 export default function App() {
   const [focusSubject, setFocusSubject] = useState("Playing");
-  console.log(focusSubject);
+  const onTimerEnd = () => {
+    setFocusSubject("");
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -17,7 +19,7 @@ export default function App() {
           <Focus addSubject={setFocusSubject} />
         ) : (
           <>
-            <Timer focusSubject={focusSubject} />
+            <Timer focusSubject={focusSubject} onTimerEnd={onTimerEnd} />
 
             <RoundedButton
               size={40}
