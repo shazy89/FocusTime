@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { useKeepAwake } from "expo-keep-awake";
 import { StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { fontSizes } from "../../utils/sizes";
@@ -8,16 +9,26 @@ import RoundedButton from "../../components/RoundedButton";
 import Timeing from "./Timeing";
 
 const Timer = ({ focusSubject }) => {
+  useKeepAwake();
   const [minutes, setMinutes] = useState(0.1);
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
 
   const onProgress = (progress) => setProgress(progress);
-  const changeTime = (min) => setMinutes(min);
+  const changeTime = (min) => {
+    setMinutes(min);
+    setProgress(1);
+    setIsStarted(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.countdown}>
-        <Countdown isPaused={!isStarted} onProgress={onProgress} />
+        <Countdown
+          isPaused={!isStarted}
+          onProgress={onProgress}
+          minutes={minutes}
+        />
       </View>
       <View style={styles.theRest}>
         <Text style={styles.title}>Focusing on:</Text>
@@ -78,7 +89,8 @@ const styles = StyleSheet.create({
     flex: 0.3,
     padding: 15,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 20
   },
   progressBar: {
     height: 10,

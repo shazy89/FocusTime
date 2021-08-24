@@ -1,6 +1,7 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
+
 import Focus from "./src/features/focus/Focus";
 import { colors } from "./src/utils/colors";
 import RoundedButton from "./src/components/RoundedButton";

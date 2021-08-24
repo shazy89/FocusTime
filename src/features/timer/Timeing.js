@@ -4,9 +4,9 @@ import RoundedButton from "../../components/RoundedButton";
 const Timeing = ({ changeTime }) => {
   return (
     <>
-      <RoundedButton size={60} title="+ 10" onPress={() => changeTime(10)} />
-      <RoundedButton size={60} title="+ 15" onPress={() => changeTime(15)} />
-      <RoundedButton size={60} title="+ 20" onPress={() => changeTime(20)} />
+      <RoundedButton size={60} title="10" onPress={() => changeTime(10)} />
+      <RoundedButton size={60} title="15" onPress={() => changeTime(15)} />
+      <RoundedButton size={60} title="20" onPress={() => changeTime(20)} />
     </>
   );
 };
