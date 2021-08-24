@@ -39,7 +39,7 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.countdown}>
+      <View style={styles.countdownWraper}>
         <Countdown
           isPaused={!isStarted}
           onEnd={onEnd}
@@ -47,7 +47,7 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
           minutes={minutes}
         />
       </View>
-      <View style={styles.theRest}>
+      <View style={styles.textWraper}>
         <Text style={styles.title}>Focusing on:</Text>
         <Text style={styles.task}>{focusSubject}</Text>
       </View>
@@ -74,6 +74,9 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
           />
         )}
       </View>
+      <View>
+        <RoundedButton size={40} title="clear" />
+      </View>
     </View>
   );
 };
@@ -81,9 +84,7 @@ const Timer = ({ focusSubject, onTimerEnd }) => {
 export default Timer;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.6
-  },
+  container: {},
   task: {
     fontSize: fontSizes.lg,
     color: colors.white,
@@ -96,14 +97,14 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center"
   },
-  countdown: {
-    flex: 1
+  countdownWraper: {
+    flex: 0.7
   },
-  theRest: {
-    flex: 1
+  textWraper: {
+    flex: 0.6
   },
   buttonWraper: {
-    flex: 0.3,
+    flex: 1,
     padding: 15,
     justifyContent: "center",
     alignItems: "center",

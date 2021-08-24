@@ -4,13 +4,11 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 
 import Focus from "./src/features/focus/Focus";
 import { colors } from "./src/utils/colors";
-import RoundedButton from "./src/components/RoundedButton";
+
 import Timer from "./src/features/timer/Timer";
 export default function App() {
   const [focusSubject, setFocusSubject] = useState("Playing");
-  const onTimerEnd = () => {
-    setFocusSubject("");
-  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -19,12 +17,12 @@ export default function App() {
           <Focus addSubject={setFocusSubject} />
         ) : (
           <>
-            <Timer focusSubject={focusSubject} onTimerEnd={onTimerEnd} />
-
-            <RoundedButton
-              size={40}
-              title="clear"
-              onPress={() => {
+            <Timer
+              focusSubject={focusSubject}
+              onTimerEnd={() => {
+                setFocusSubject("");
+              }}
+              clearSubject={() => {
                 setFocusSubject("");
               }}
             />
