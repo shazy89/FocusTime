@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useKeepAwake } from "expo-keep-awake";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Vibration, Platform } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { fontSizes } from "../../utils/sizes";
 import { colors } from "../../utils/colors";
@@ -8,15 +8,30 @@ import Countdown from "../../components/Countdown";
 import RoundedButton from "../../components/RoundedButton";
 import Timeing from "./Timeing";
 
+const DEFAULT_TIME = 0.1;
 const Timer = ({ focusSubject }) => {
+  // USE KEEP AWAKE WILL MAKE SURE THat the scren won't go off
   useKeepAwake();
-  const [minutes, setMinutes] = useState(0.1);
+  const [minutes, setMinutes] = useState(DEFAULT_TIME);
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
-
+  const vibrate = () => {
+    if (Platform.OS === "ios") {
+      const interval = setInterval(() => Vibration.vibrate(), 1000);
+      setTimeout(() => clearInterval(interval), 1000);
+    } else {
+      Vibration.vibrate("10s");
+    }
+  };
   const onProgress = (progress) => setProgress(progress);
   const changeTime = (min) => {
     setMinutes(min);
+    setProgress(1);
+    setIsStarted(false);
+  };
+  const onEnd = () => {
+    vibrate();
+    setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
   };
@@ -26,6 +41,7 @@ const Timer = ({ focusSubject }) => {
       <View style={styles.countdown}>
         <Countdown
           isPaused={!isStarted}
+          onEnd={onEnd}
           onProgress={onProgress}
           minutes={minutes}
         />

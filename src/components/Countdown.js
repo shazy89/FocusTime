@@ -6,12 +6,15 @@ const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 //const formatIncome = (amount) => (amount > 0 ? `$ ${amount}.00` : null);
 //const formatTime
-const Countdown = ({ minutes, isPaused, onProgress }) => {
+const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
   const interval = useRef(null);
 
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
+        // make sure every time counting ends you are clearing the intervals
+        clearInterval(interval.current);
+        onEnd();
         return time;
       }
       const timeLeft = time - 1000;
@@ -19,6 +22,7 @@ const Countdown = ({ minutes, isPaused, onProgress }) => {
       return timeLeft;
     });
   };
+
   // we are forcing the use effect to detect the changes and make the update
   useEffect(() => {
     setMillis(minutesToMillis(minutes));
