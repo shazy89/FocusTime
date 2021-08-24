@@ -6,7 +6,7 @@ const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 //const formatIncome = (amount) => (amount > 0 ? `$ ${amount}.00` : null);
 //const formatTime
-const Countdown = ({ minutes = 20, isPaused }) => {
+const Countdown = ({ minutes = 2, isPaused, onProgress }) => {
   const interval = useRef(null);
 
   const countDown = () => {
@@ -15,11 +15,15 @@ const Countdown = ({ minutes = 20, isPaused }) => {
         return time;
       }
       const timeLeft = time - 1000;
+      onProgress(timeLeft / minutesToMillis(minutes));
       return timeLeft;
     });
   };
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused) {
+      if (interval.current) clearInterval(interval.current);
+      return;
+    }
     interval.current = setInterval(countDown, 1000);
     return () => clearInterval(interval.current);
   }, [isPaused]);
