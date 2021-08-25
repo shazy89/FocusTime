@@ -18,14 +18,14 @@ export default function App() {
   const addFocusHistorySubjectWithStat = (subject, status) => {
     setFocusHistory([...focusHistory, { subject, status }]);
   };
-  const onClear = () => {};
+  const onClear = () => setFocusHistory([]);
 
   //  useEffect(() => {
   //    if (focusSubject) {
   //      setFocusHistory([...focusHistory, focusSubject]);
   //    }
   //  }, [focusSubject]);
-  console.log(focusHistory);
+  //console.log(focusHistory);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
