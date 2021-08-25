@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+
 import RoundedButton from "../../components/RoundedButton";
 import { fontSizes, paddingSizes } from "../../utils/sizes";
 import { colors } from "../../utils/colors";
@@ -22,6 +23,7 @@ const FocusHistory = ({ focusHistory, onClear }) => {
             contentContainerStyle={styles.contetntContainer}
             data={focusHistory}
             renderItem={HistoryItem}
+            keyExtractor={(item) => item.id}
           />
           <View style={styles.clearContainer}>
             <RoundedButton size={50} title="clear" onPress={clearHistory} />
