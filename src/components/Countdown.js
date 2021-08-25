@@ -8,6 +8,9 @@ const formatTime = (time) => (time < 10 ? `0${time}` : time);
 //const formatTime
 const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
   const interval = useRef(null);
+  const [millis, setMillis] = useState(minutesToMillis(minutes));
+  const minute = Math.floor(millis / 1000 / 60) % 60;
+  const seconds = Math.floor(millis / 1000) % 60;
 
   const countDown = () => {
     setMillis((time) => {
@@ -18,7 +21,7 @@ const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
         return time;
       }
       const timeLeft = time - 1000;
-      onProgress(timeLeft / minutesToMillis(minutes));
+
       return timeLeft;
     });
   };
@@ -37,10 +40,9 @@ const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
-  const [millis, setMillis] = useState(minutesToMillis(minutes));
-  const minute = Math.floor(millis / 1000 / 60) % 60;
-  const seconds = Math.floor(millis / 1000) % 60;
-
+  useEffect(() => {
+    onProgress(millis / minutesToMillis(minutes));
+  }, [millis]);
   return (
     <>
       <Text style={styles.text}>

@@ -7,14 +7,3 @@ export const saveFocusHistory = async (focusHistory) => {
     console.log(e);
   }
 };
-
-export const loadFocusHistory = async (setFocusHistory) => {
-  try {
-    const history = await AsyncStorage.getItem("focusHistory");
-    if (history && JSON.parse(history).length) {
-      setFocusHistory(JSON.parse(history));
-    }
-  } catch (e) {
-    console.lot(e);
-  }
-};

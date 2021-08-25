@@ -9,7 +9,7 @@ const Focus = ({ addSubject }) => {
   const [tempIte, setTempItem] = useState("");
 
   return (
-    <View>
+    <>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>What would you like to focus on?</Text>
         <View style={styles.inputContainer}>
@@ -31,7 +31,7 @@ const Focus = ({ addSubject }) => {
           />
         </View>
       </View>
-    </View>
+    </>
   );
 };
 

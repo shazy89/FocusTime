@@ -24,7 +24,9 @@ const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
     }
   };
 
-  const onProgress = (progress) => {};
+  const onProgress = (progress) => {
+    setProgress(progress);
+  };
   const changeTime = (min) => {
     setMinutes(min);
     setProgress(1);
