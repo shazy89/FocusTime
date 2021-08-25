@@ -23,7 +23,8 @@ const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
       Vibration.vibrate(10000);
     }
   };
-  const onProgress = (progress) => setProgress(progress);
+
+  const onProgress = (progress) => {};
   const changeTime = (min) => {
     setMinutes(min);
     setProgress(1);
