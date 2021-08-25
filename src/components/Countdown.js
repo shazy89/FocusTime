@@ -17,7 +17,7 @@ const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
       if (time === 0) {
         // make sure every time counting ends you are clearing the intervals
         clearInterval(interval.current);
-        onEnd();
+
         return time;
       }
       const timeLeft = time - 1000;
@@ -42,7 +42,11 @@ const Countdown = ({ minutes, isPaused, onProgress, onEnd }) => {
 
   useEffect(() => {
     onProgress(millis / minutesToMillis(minutes));
+    if (millis === 0) {
+      onEnd();
+    }
   }, [millis]);
+
   return (
     <>
       <Text style={styles.text}>

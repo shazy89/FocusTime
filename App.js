@@ -1,6 +1,8 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
+import "react-native-get-random-values";
+import { v4 as uuid } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Focus from "./src/features/focus/Focus";
 import FocusHistory from "./src/features/focus/FocusHistory";
@@ -16,10 +18,7 @@ export default function App() {
   const [focusHistory, setFocusHistory] = useState([]);
 
   const addFocusHistorySubjectWithStat = (subject, status) => {
-    setFocusHistory([
-      ...focusHistory,
-      { id: focusHistory.length, subject, status }
-    ]);
+    setFocusHistory([...focusHistory, { id: String(uuid()), subject, status }]);
   };
   const onClear = () => setFocusHistory([]);
 
@@ -36,7 +35,7 @@ export default function App() {
   useEffect(() => {
     saveFocusHistory();
   }, [focusHistory]);
-
+  console.log(focusHistory);
   const loadFocusHistory = async () => {
     try {
       const history = await AsyncStorage.getItem("focusHistory");
